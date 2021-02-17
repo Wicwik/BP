@@ -1,0 +1,3 @@
+[submodule "stylegan2"]
+	path = stylegan2
+	url = git@github.com:NVlabs/stylegan2.git
