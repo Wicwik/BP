@@ -10,7 +10,7 @@ GPU: NVIDIA 1080TI with 11GB of global memory
 CUDA Version: 11.2
 
 ### ENV
-Python version: 3.
+Python version: 3.7
 
 Tensorflow version: 1.15
 
