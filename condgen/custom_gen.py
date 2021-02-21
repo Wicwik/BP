@@ -1,6 +1,5 @@
-"""
-Simple test to try image from noise vector generation
-"""
+"""Simple test to try image from noise vector generation """
+
 import pickle
 import numpy as np
 import PIL.Image
