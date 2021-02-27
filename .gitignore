@@ -1,2 +1,4 @@
 datasets
 training_checkpoints
+.stylegan2-cache
+.ipynb_checkpoints
