@@ -21,8 +21,6 @@ def get_sylegan_networks(path_or_url):
 
     return G, D, Gs
 
-
-
 def generate_image(path_or_url, batch_size, truncation_psi = None):
     G, D, Gs = get_sylegan_networks(path_or_url)
     noise_vars = [var for name, var in Gs.components.synthesis.vars.items() if name.startswith('noise')]
@@ -40,6 +38,3 @@ def generate_image(path_or_url, batch_size, truncation_psi = None):
         images = Gs.run(z, None, **Gs_kwargs)
         img = PIL.Image.fromarray(images[0], 'RGB')
         img.show()
-
-
-generate_image(_stylegan_ffhq_f_gdrive_url, 10)

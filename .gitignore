@@ -2,3 +2,10 @@ datasets
 training_checkpoints
 .stylegan2-cache
 .ipynb_checkpoints
+__pycache__
+*png
+*jpg
+*pkl
+*npy
+*h5
+*ckpt

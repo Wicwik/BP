@@ -1,5 +1,6 @@
 import tensorflow.compat.v2 as tfc
 import tensorflow as tf
+import os
 
 import pathlib
 import numpy as np
@@ -18,10 +19,11 @@ TRAIN_SIZE = int(0.7 * DATASET_SIZE)
 VAL_SIZE = int(0.15 * DATASET_SIZE)
 TEST_SIZE = int(0.15 * DATASET_SIZE)
 
-data_dir = pathlib.Path('../../datasets/celeba')
+ROOT = os.path.dirname(os.path.realpath(__file__)) + '/../../..'
+data_dir = pathlib.Path(ROOT + '/datasets/celeba')
 img_dir = pathlib.Path(str(data_dir) + '/img_align_celeba_png')
-attr_dir = pathlib.Path(str(data_dir) + '/attr_celeba.csv')
-dataset_file = 'images.tfrecords'
+attr_dir = pathlib.Path(str(data_dir) + '/attributes/attr_celeba.csv')
+dataset_file = ROOT + '/datasets/celeba/tfrecords_with_attributes/celeba.tfrecords'
 
 tf.compat.v1.enable_eager_execution()
 tf.enable_eager_execution()
@@ -64,8 +66,8 @@ def _parse_images_function(example, labels, attribute_name):
     
     return img, lbl
 
-def _get_tensor_tuple(parsed_example, label):
-    return (_decode_image(parsed_example['raw']), parsed_example[label].numpy())
+# def _get_tensor_tuple(parsed_example, label):
+#     return (_decode_image(parsed_example['raw']), parsed_example[label].numpy())
 
 def parse_dataset(dataset, labels):
     return dataset.map(partial(_parse_images_function, labels=labels, attribute_name=TESTED_ATTR))
@@ -94,8 +96,7 @@ lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
     initial_learning_rate, decay_steps=20, decay_rate=0.96, staircase=True
 )
 
-checkpoint_path = "training_2/cp-{epoch:04d}.ckpt"
-metric = 'val_accuraccy'
+checkpoint_path = "training/cp-{epoch:04d}.ckpt"
 
 checkpoint_cb = tf.keras.callbacks.ModelCheckpoint(
     filepath=checkpoint_path,
@@ -169,6 +170,11 @@ show_batch(image_batch, label_batch)
 
 with strategy.scope():
     model = make_model()
+
+
+print(train_dataset)
+print(test_dataset)
+print(val_dataset)
 
 history = model.fit(
     train_dataset,
