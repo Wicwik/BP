@@ -10,7 +10,7 @@ import pandas as pd
 import axis
 
 _root_path =  os.path.dirname(os.path.realpath(__file__)) + '/../..'
-_path_sample_jpg = './assets/samples_jpg/'
+_path_sample_jpg = './assets/samples_2/'
 _path_feature = './assets/results/feature_eyeglasses/'
 
 _normalize_feature_direction = True
@@ -50,17 +50,17 @@ with open(feature_direction_file, 'wb') as f:
 	pickle.dump(dict_to_save, f)
 
 
-feature_direction_file = glob.glob(os.path.join(_path_feature, 'feature_direction_*.pkl'))[-1]
+# feature_direction_file = glob.glob(os.path.join(_path_feature, 'feature_direction_*.pkl'))[-1]
 
-with open(feature_direction_file, 'rb') as f:
-	feature_direction_dict = pickle.load(f)
+# with open(feature_direction_file, 'rb') as f:
+	# feature_direction_dict = pickle.load(f)
 
 
-feature_direction = feature_direction_dict['direction']
-feature_name = np.array(feature_direction_dict['name'])
+# feature_direction = feature_direction_dict['direction']
+# feature_name = np.array(feature_direction_dict['name'])
 
-len_z, len_y = feature_direction.shape
+# en_z, len_y = feature_direction.shape
 
-feature_direction_disentangled = axis.disentangle_feature_axis_by_idx(feature_direction, idx_base=range(len_y//4), idx_target=None)
+# feature_direction_disentangled = axis.disentangle_feature_axis_by_idx(feature_direction, idx_base=range(len_y//4), idx_target=None)
 
-axis.plot_feature_cos_sim(feature_direction_disentangled, feature_name=None)
+# axis.plot_feature_cos_sim(feature_direction_disentangled, feature_name=None)

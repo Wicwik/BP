@@ -24,7 +24,7 @@ for i in range(_n_batch):
 
 	latents = rnd.randn(_batch_size, *gen.Gs.input_shape[1:])
 	imgs = gen.get_images(latents)
-	#imgs = np.asarray([cv2.resize(img, dsize=(178, 218), interpolation=cv2.INTER_CUBIC) for img in imgs])
+	imgs = np.asarray([cv2.resize(img, dsize=(178, 218), interpolation=cv2.INTER_CUBIC) for img in imgs])
 
 	imgs = imgs/255
 

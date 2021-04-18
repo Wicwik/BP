@@ -15,6 +15,7 @@ rnd = np.random.RandomState()
 gen = StyleGANGenerator(_stylegan_ffhq_f_gdrive_url)
 
 feature_direction_file = glob.glob(os.path.join(_path_feature, 'feature_direction_*.pkl'))[-1]
+print(feature_direction_file)
 with open(feature_direction_file, 'rb') as f:
 	feature_direction_dict = pickle.load(f)
 
@@ -37,13 +38,15 @@ latent += feature_direction[:, 0]
 img2 = gen.get_images(latent)
 
 ax = plt.subplot(1, 2, 1)
-plt.imshow(img1[0]/255)
 plt.axis("off")
+plt.imshow(img1[0]/255)
+
 
 ax = plt.subplot(1, 2, 2)
-plt.imshow(img2[0]/255)
 plt.axis("off")
-plt.show()
+plt.imshow(img2[0]/255)
+
+
 
 # for i in range(25):
 # 	latent = rnd.randn(1, *gen.Gs.input_shape[1:])
