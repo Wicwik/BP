@@ -1,9 +1,16 @@
 import numpy as np
 import sklearn.linear_model as linear_model
 
-def find_feature_axis(z, y, **kwargs_model):
-	model = linear_model.LinearRegression(**kwargs_model)
-	model.fit(z, y)
+def find_feature_axis(z, y, method='linear', **kwargs_model):
+	if method == 'linear':
+		model = linear_model.LinearRegression(**kwargs_model)
+		model.fit(z, y)
+	elif method == 'tanh':
+		def arctanh_clip(y):
+			return np.arctanh(np.clip(y, np.tanh(0), np.tanh(3)))
+
+		model = linear_model.LinearRegression(**kwargs_model)
+		model.fit(z, arctanh_clip(y))
 
 	return model.coef_.transpose()
 
