@@ -188,3 +188,4 @@ dependencies:
     - tensorflow-metadata==0.27.0
     - tqdm==4.57.0
     - typing-extensions==3.7.4.3
+prefix: /home/rbelanec/anaconda3/envs/BP
